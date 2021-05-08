@@ -1,18 +1,48 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+    <DataTable :data="tableData" />
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import DataTable from "../components/Table";
+import CovidInforService from "../service/covid-info-service";
 export default {
-  name: "Home",
-  components: {
-    HelloWorld,
-  },
+    components: {
+        DataTable,
+    },
+    data: () => ({
+        service: CovidInforService,
+        tableData: {
+            headers: [
+                {
+                    text: "",
+                    align: "start",
+                    sortable: false,
+                    value: "CountryCode",
+                },
+                {
+                    text: "Country",
+                    sortable: false,
+                    value: "Country",
+                },
+                { text: "Total Confirmed", value: "TotalConfirmed" },
+                { text: "Total Deaths", value: "TotalDeaths" },
+                { text: "Total Recovered", value: "TotalRecovered" },
+                { text: "Favorite", value: "Favorite" },
+            ],
+            items: [],
+        },
+    }),
+    mounted() {
+        this.loadData();
+    },
+    methods: {
+        loadData() {
+            return this.service.getInfo().then((res) => {
+                if (res.data.Countries) {
+                    this.tableData.items = res.data.Countries;
+                }
+            });
+        },
+    },
 };
 </script>
