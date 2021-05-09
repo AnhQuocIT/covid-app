@@ -12,6 +12,8 @@ export default {
     data: () => ({
         service: CovidInforService,
         tableData: {
+            search: '',
+            isLoading: false,
             headers: [
                 {
                     text: "",
@@ -32,13 +34,18 @@ export default {
             items: [],
         },
     }),
+    created() {
+
+    },
     mounted() {
         this.loadData();
     },
     methods: {
         loadData() {
+            this.tableData.isLoading = true;
             return this.service.getInfo().then((res) => {
                 if (res.data.Countries) {
+                    this.tableData.isLoading = false;
                     this.tableData.items = res.data.Countries;
                 }
             });

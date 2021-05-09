@@ -8,10 +8,5 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   vuetify,
-  data() {
-    return {
-      drawer: null,
-    }
-  },
   render: (h) => h(App),
 }).$mount("#app");

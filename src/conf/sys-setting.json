@@ -1,0 +1,12 @@
+{
+    "app": {
+        "header": {
+            "name": "COVID-19 Data Visualization",
+            "subtitle": "COVID-19 Application",
+            "title": "Welcome to COVID-19 Data Visualization",
+            "owner": "Nguyen Anh Quoc",
+            "description": "COVID-19 Data Visualization in 30 days",
+            "imgScr": "https://picsum.photos/1920/1080?random"
+        }
+    }
+}

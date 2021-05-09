@@ -2,8 +2,8 @@
     <v-navigation-drawer v-model="drawer" app>
         <v-list-item>
             <v-list-item-content>
-                <v-list-item-title class="title"> Covid App </v-list-item-title>
-                <v-list-item-subtitle> Application </v-list-item-subtitle>
+                <v-list-item-title class="title"> {{menu.title}} </v-list-item-title>
+                <v-list-item-subtitle> Data Visualization </v-list-item-subtitle>
             </v-list-item-content>
         </v-list-item>
 
@@ -30,7 +30,7 @@
 
 <script>
 export default {
-    props: ["menu"],
+    props: ["menu","drawer"],
 };
 </script>
 
