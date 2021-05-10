@@ -9,7 +9,6 @@ export default (function () {
             const summaryUrl = this.baseUrl + this.getSummary;
             return new Promise((resolve, reject) => {
                 Axios.get(summaryUrl).then(res => {
-                    res.data = this.mapDataWithStorage(res.data);
                     resolve(res);
                 }).catch(res => {
                     reject(res);
@@ -20,7 +19,7 @@ export default (function () {
             const dataStorage = LocalStorage.getDataFromStorage();
             if (dataStorage == null || dataStorage.length == 0) return data;
             dataStorage.forEach(item => {
-                data.Countries.find(country => {
+                data.find(country => {
                     if (country.CountryCode == item) {
                         country.isFavorite = true;
                         return;
@@ -37,6 +36,7 @@ export default (function () {
                 dataStorage.forEach(item => {
                     res.data.Countries.find(country => {
                         if (country.CountryCode == item) {
+                            country.isFavorite = true;
                             favoriteList.push(country);
                             return;
                         }

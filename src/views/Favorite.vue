@@ -38,20 +38,21 @@ export default {
             items: [],
         },
     }),
-    created() {
-        this.tableData.isLoading = true;
-        
-        if (this.service.LocalStorageService.getDataFromStorage() == null || this.service.LocalStorageService.getDataFromStorage().length == 0) {
-            this.tableData.isLoading = false;
-            return;
-        }
-        this.timmer = setInterval(() => {
+    watch: {
+        "tableData.items": function() {
             if (this.tableData.items.length != 0) {
                 this.tableData.isLoading = false;
                 return;
             }
-            this.tableData.items = this.service.CovidInforService.getFavorite();
-        }, 800);
+        }
+    },
+    created() {
+        this.tableData.isLoading = true;
+        if (this.service.LocalStorageService.getDataFromStorage() == null || this.service.LocalStorageService.getDataFromStorage().length == 0) {
+            this.tableData.isLoading = false;
+            return;
+        }
+        this.tableData.items = this.service.CovidInforService.getFavorite();
     },
     destroyed() {
         clearInterval(this.timmer);

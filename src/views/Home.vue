@@ -46,7 +46,7 @@ export default {
             return this.service.getInfo().then((res) => {
                 if (res.data.Countries) {
                     this.tableData.isLoading = false;
-                    this.tableData.items = res.data.Countries;
+                    this.tableData.items = this.service.mapDataWithStorage(res.data.Countries);
                 }
             });
         },
