@@ -1,31 +1,33 @@
-import Vue from "vue";
-// import { expect } from "chai";
+import { expect } from "chai";
+import { shallowMount } from "@vue/test-utils";
 import Menu from "@/components/Menu";
 
-describe("BarChart.vue", () => {
-    const drawer = false;
-    const menu = {
-        title: "Test menu title",
-        items: [
-            { title: "Country List", icon: "mdi-view-dashboard", to: "/" },
-            { title: "Favorite", icon: "mdi-star-box", to: "/favorite" },
-        ],
-        right: null,
-    };
-    const Constructor = Vue.extend(Menu);
-    const component = new Constructor({ propsData: [menu,drawer] }).$mount();
-    it("Should props data successfully", () => {
-        console.log("quoc",component.menu);
-        // expect(component.props.menu).to.be.eql(menu);
+describe("Menu.vue", () => {
+    const component = shallowMount(Menu, {
+        propsData: {
+            drawer: true,
+            menu: {
+                title: "Test menu title",
+                items: [
+                    { title: "Country List", icon: "mdi-view-dashboard", to: "/" },
+                    { title: "Favorite", icon: "mdi-star-box", to: "/favorite" },
+                ],
+                right: null,
+            }
+        },
     });
-    // it("Should change value of isShowAboutDialog to FALSE when call onCloseDialog", () => {
-    //     component.isShowAboutDialog = true;
-    //     component.onCloseDialog();
-    //     expect(component.isShowAboutDialog).to.be.false;
-    // });
-    // it("Should register emit event 'toogle' sucessfully", () => {
-    //     component.onToogleMenu();
-    //     console.log("TODO", window);
-    //     // expect(component.toogle).to.be.not.equal(0); $options
-    // });
+    it("Should props data successfully", () => {
+        const menu = {
+            title: "Test menu title",
+            items: [
+                { title: "Country List", icon: "mdi-view-dashboard", to: "/" },
+                { title: "Favorite", icon: "mdi-star-box", to: "/favorite" },
+            ],
+            right: null,
+        };
+        expect(component.props().menu).to.be.not.null;
+        expect(component.props().menu).to.be.eql(menu);
+        expect(component.props().drawer).to.be.not.null;
+        expect(component.props().drawer).to.be.true;
+    });
 });

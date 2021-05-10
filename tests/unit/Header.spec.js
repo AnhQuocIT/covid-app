@@ -1,44 +1,39 @@
-import Vue from "vue";
 import { expect } from "chai";
+import { shallowMount } from "@vue/test-utils";
 import Headers from "@/components/Header";
 
-describe("BarChart.vue", () => {
-    const header = {
-        title: "Test App",
-        img: {
-            scr: "Test scr",
-            gradientStyle: "Test gradient",
+describe("Header.vue", () => {
+    const component = shallowMount(Headers, {
+        propsData: {
+            drawer: true,
+            header: {
+                title: "Test App",
+                img: {
+                    scr: "Test scr",
+                    gradientStyle: "Test gradient",
+                },
+                icon: {
+                    rightIcon: "mdi-shield-star",
+                },
+                color: {
+                    mainColor: "#fcb69f",
+                },
+            }
         },
-        icon: {
-            rightIcon: "mdi-shield-star",
-        },
-        color: {
-            mainColor: "#fcb69f",
-        },
-    };
-    const menu = {
-        title: "Test menu title",
-        items: [
-            { title: "Country List", icon: "mdi-view-dashboard", to: "/" },
-            { title: "Favorite", icon: "mdi-star-box", to: "/favorite" },
-        ],
-        right: null,
-    };
-    const Constructor = Vue.extend(Headers);
-    const component = new Constructor({ propsData: [header, menu] }).$mount();
+    });
     it("Should change value of isShowAboutDialog to TRUE when call onOpenDialog", () => {
-        component.isShowAboutDialog = false;
-        component.onOpenDialog();
-        expect(component.isShowAboutDialog).to.be.true;
+        component.vm.isShowAboutDialog = false;
+        component.vm.onOpenDialog();
+        expect(component.vm.isShowAboutDialog).to.be.true;
     });
     it("Should change value of isShowAboutDialog to FALSE when call onCloseDialog", () => {
-        component.isShowAboutDialog = true;
-        component.onCloseDialog();
-        expect(component.isShowAboutDialog).to.be.false;
+        component.vm.isShowAboutDialog = true;
+        component.vm.onCloseDialog();
+        expect(component.vm.isShowAboutDialog).to.be.false;
     });
-    it("Should register emit event 'toogle' sucessfully", () => {
-        component.onToogleMenu();
-        console.log("TODO");
-        // expect(component.toogle).to.be.not.equal(0); $options
+    it("Should register emit event 'toogle' sucessfully", async () => {
+        component.vm.onToogleMenu();
+        await component.vm.$nextTick()
+        expect(component.emitted('toogle').length).to.be.equal(1);
     });
 });

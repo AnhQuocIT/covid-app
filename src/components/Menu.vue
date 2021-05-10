@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer :value="toogleMenu" app>
         <v-list-item>
             <v-list-item-content>
                 <v-list-item-title class="title"> {{menu.title}} </v-list-item-title>
@@ -31,6 +31,11 @@
 <script>
 export default {
     props: ["menu","drawer"],
+    computed: {
+        toogleMenu() {
+            return this.drawer;
+        }
+    }
 };
 </script>
 

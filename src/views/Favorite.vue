@@ -5,12 +5,16 @@
 <script>
 import DataTable from "../components/Table";
 import CovidInforService from "../service/covid-info-service";
+import LocalStorageService from "../service/localstorage-service";
 export default {
     components: {
         DataTable,
     },
     data: () => ({
-        service: CovidInforService,
+        service: {
+            CovidInforService,
+            LocalStorageService,
+        },
         tableData: {
             search: '',
             isLoading: false,
@@ -36,12 +40,17 @@ export default {
     }),
     created() {
         this.tableData.isLoading = true;
+        
+        if (this.service.LocalStorageService.getDataFromStorage() == null || this.service.LocalStorageService.getDataFromStorage().length == 0) {
+            this.tableData.isLoading = false;
+            return;
+        }
         this.timmer = setInterval(() => {
             if (this.tableData.items.length != 0) {
                 this.tableData.isLoading = false;
                 return;
             }
-            this.tableData.items = this.service.getFavorite();
+            this.tableData.items = this.service.CovidInforService.getFavorite();
         }, 800);
     },
     destroyed() {
