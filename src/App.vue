@@ -55,7 +55,7 @@ export default {
         this.globalLoading.isLoading = true;
         setTimeout(() => {
             this.globalLoading.isLoading = false;
-        }, 2000);
+        }, 1000);
     },
     methods: {
         onToogleMenu() {

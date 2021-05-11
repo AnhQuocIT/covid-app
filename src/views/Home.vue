@@ -35,9 +35,6 @@ export default {
         },
     }),
     created() {
-
-    },
-    mounted() {
         this.loadData();
     },
     methods: {

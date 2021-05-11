@@ -81,7 +81,7 @@
             </v-row>
             <v-divider></v-divider>
             <v-row no-gutters>
-                <v-col class="sub-title">COVID-19 Data Visualization in 30 Days</v-col>
+                <v-col class="sub-title">COVID-19 Data Visualization in {{this.dialog.chart.numberRecords}} Days</v-col>
             </v-row>
             <v-divider></v-divider>
             <bar-chart
