@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="dialog" hide-overlay persistent width="400" height="300">
+    <v-dialog v-model="dialog" persistent width="400" height="300">
         <v-card color="primary" dark>
             <v-card-text>
                 Please wait...

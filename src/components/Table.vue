@@ -116,8 +116,8 @@ export default {
                 if (this.isMobileView()) {
                     this.dialog.chart.numberRecords = 10;
                 }
-                const conditionDate = this.formartDate(new Date(new Date().setDate(new Date().getDate() - this.dialog.chart.numberRecords)));
-                const date = this.formartDate(country.Date);
+                const conditionDate = this.formatDate(new Date(new Date().setDate(new Date().getDate() - this.dialog.chart.numberRecords)));
+                const date = this.formatDate(country.Date);
                 if (date >= conditionDate) {
                     arrayDate.push(date);
                     arrayConfirmed.push(country.Confirmed);
@@ -143,7 +143,7 @@ export default {
             };
             this.dialog.chart.chartdata.datasets.push(confirmedCase, deathCase, recoveredCase);
         },
-        formartDate(date) {
+        formatDate(date) {
             return moment(date, "YYYYMMDD").format("YYYY/MM/DD");
         },
         isMobileView(){
